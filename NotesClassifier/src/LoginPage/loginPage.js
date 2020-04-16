@@ -18,7 +18,7 @@ function login (props){
                 },
                 body:JSON.stringify({
                     email: userName,
-                    password
+                    password: Password
                 })
             })
             .then(res=>res.json())
