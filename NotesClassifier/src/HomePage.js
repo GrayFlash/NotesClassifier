@@ -54,13 +54,13 @@ const HomePage=(props)=>{
                             />
                         
  
-                    <FAB
+                    {/* <FAB
                     theme= {theme}
                     onPress={() => props.navigation.navigate("CreateNewFolder")}
                     style= {styles.fab}
                     small ={false}
                     icon="plus"
-                    />
+                    /> */}
                 </View>
                 
             </View>
@@ -74,7 +74,7 @@ const theme = {
       accent: '#fcba03',
     },
 };
-styles=StyleSheet.create({
+const styles=StyleSheet.create({
     Home:{
           flex: 1, 
           //alignItems: 'center',

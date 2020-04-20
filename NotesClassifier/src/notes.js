@@ -8,7 +8,7 @@ const NotesFolder = (props) =>{
 
         {id:"1", name:"Mathematics"},
         {id:"2", name:"Branch-Specific"},
-        {id:"3", name:"Recent"}
+        {id:"3", name:"EM"}
 
     ];
     const renderList = ((item)=>{
@@ -50,7 +50,7 @@ const theme={
         accent:"#fcba03",
     }
 };
-styles=StyleSheet.create({
+const styles=StyleSheet.create({
     Home:{
           flex: 1, 
           //alignItems: 'center',
