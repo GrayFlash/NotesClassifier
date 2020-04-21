@@ -2,10 +2,34 @@ import React, {useState, Component} from 'react';
 import { StyleSheet, Text, View, Modal, Alert} from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 
-const CreateNewFolder = (props) => {
+const CreateNewFolder = ({navigation}) => {
     const [Name, setName] = useState("")
     const [Description, setDescription] = useState("")
-    
+    const submitData = ()=>{
+
+        // Update the link below everytime you run the app unless you employ Heroku
+        
+        
+                fetch("http://6d48302d.ngrok.io/createNew",{
+                    method:"post",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        name: Name,
+                        description: Description
+                    })
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    Alert.alert(`Details of ${data.name} have been saved succesfully`)
+                    navigation.navigate("NotesFolder")
+                })
+                .catch(err=>{
+                    Alert.alert("Some Error")
+                    console.log(err)
+                })
+            }
     return(
         <View style={styles.root}>
             <TextInput
@@ -23,7 +47,8 @@ const CreateNewFolder = (props) => {
                 onChangeText={text => {setDescription( text )}}
             />
             <View style = {styles.saveButtonsView}>
-            <Button theme={theme} icon="content-save" mode="contained" onPress={()=> console.log("Saved Details") }>
+            <Button theme={theme} icon="content-save" mode="contained" 
+            onPress={()=> submitData() }>
                 Save
             </Button>
             <Button theme={theme} icon="cancel" onPress={()=>  props.navigation.navigate("HomePage") }>

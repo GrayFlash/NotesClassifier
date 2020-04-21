@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import HomePage from './src/HomePage';
 import NotesFolder from './src/notes';
 import chatPage from './src/chatPage';
+import recent from './src/recent';
+import scheduledDocs from  './src/scheduledDocs'
 import CreateNewFolder from './src/CreateNewFolder';
 import setSchedule from './src/setSchedule';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -46,7 +48,16 @@ function LeftDrawer () {
           component={CreateNewFolder} 
           options={{...stackDesignHead,title:"+ new Folder"}}
           />
-          
+          <Stack.Screen 
+          name="ScheduledFolder"
+          component={scheduledDocs} 
+          options={{...stackDesignHead,title:"Scheduled Docs"}}
+          />
+          <Stack.Screen 
+          name="RecentFolder"
+          component={recent} 
+          options={{...stackDesignHead,title:"Recent Folder"}}
+          />
           </Stack.Navigator> 
   )
 }

@@ -16,11 +16,24 @@ const HomePage=(props)=>{
         {id:"3", name:"Recent", description:"Opened Recently"}
 
     ];
+    const checkIdtoNavigate=(item)=>{
+    let ch = item.id;
+    if(ch==='1'){
+        props.navigation.navigate("NotesFolder",{item})
+    }
+    if(ch==='2'){
+        props.navigation.navigate("ScheduledFolder",{item})
+    }
+    if(ch==='3'){
+        props.navigation.navigate("RecentFolder",{item})
+    }
+    }
     const renderList = ((item)=>{
         return(
             <Card style={styles.myCard}
             key={item.id}
-            onPress={()=> props.navigation.navigate("NotesFolder",{item})}
+            //onPress={()=> props.navigation.navigate("NotesFolder",{item})}
+            onPress = {()=> checkIdtoNavigate(item)}
             >
                 <View style={styles.cardContent}>
                         <Entypo name="folder" size={32} color="#fcba03"/>
@@ -35,15 +48,6 @@ const HomePage=(props)=>{
     })
         return(
             <View style={styles.Home}>
-                    {/* <View style={styles.headerflex}>
-                        <View style={{backgroundColor:"#fcba03" }}>
-                        <Entypo name="menu" size={32} color="black" />
-                            
-                        </View>
-                        <View style={styles.Header}>
-                            <Text style={{fontSize:22, fontWeight: 'bold' }} >Home</Text>
-                        </View>
-                    </View> */}
                     <View style={styles.PageContent}>
                      
                             <FlatList
@@ -53,14 +57,6 @@ const HomePage=(props)=>{
                             }}
                             />
                         
- 
-                    {/* <FAB
-                    theme= {theme}
-                    onPress={() => props.navigation.navigate("CreateNewFolder")}
-                    style= {styles.fab}
-                    small ={false}
-                    icon="plus"
-                    /> */}
                 </View>
                 
             </View>

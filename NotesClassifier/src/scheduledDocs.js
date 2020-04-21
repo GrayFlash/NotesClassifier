@@ -2,10 +2,10 @@ import React,{Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-const recent =(props)=>{
+const scheduledDocs =(props)=>{
     return(
         <View style={styles.MainC}>
-            <Text>Recently viewd Folders</Text>
+            <Text>Scheduled Documents to be displayed</Text>
         </View>
     )
 }
@@ -16,4 +16,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
-export default recent ;
+export default scheduledDocs ;

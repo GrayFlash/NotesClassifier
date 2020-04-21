@@ -1,16 +1,29 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import {Card, FAB} from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 
 const NotesFolder = (props) =>{
-    const data = [
+    const [data, setData] = useState([])
+    const [loading, setLoading] = useState(true)
 
-        {id:"1", name:"Mathematics"},
-        {id:"2", name:"Branch-Specific"},
-        {id:"3", name:"EM"}
+    const  fetchData = () =>{
 
-    ];
+        // Update the link below everytime you run the app unless you employ Heroku
+        
+                fetch("http://6d48302d.ngrok.io/")
+                .then(res=>res.json())
+                .then(results=>{
+                    setData(results)
+                    setLoading(false)
+                })
+            }
+        
+            useEffect(()=>{
+                fetchData()
+            },[])
+
+
     const renderList = ((item)=>{
         return(
             <Card style={styles.myCard}
@@ -32,6 +45,9 @@ const NotesFolder = (props) =>{
                 renderItem={({item})=>{
                    return renderList(item)
                 }}
+                keyExtractor={item=>item._id}
+                onRefresh={()=>fetchData()}
+                refreshing={loading}
                 />
                 <FAB
                 theme={theme}
