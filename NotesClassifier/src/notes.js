@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from 'react';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList,Alert } from 'react-native';
 import {Card, FAB} from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 
@@ -23,11 +23,35 @@ const NotesFolder = (props) =>{
                 fetchData()
             },[])
 
+    const recentData = (item)=>{
 
+        fetch("http://6d48302d.ngrok.io/recentFolder",{
+                    method:"post",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        name: item.name,
+                        description: item.description
+                    })
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    Alert.alert(`Details of ${data.name} has been added to recent succesfully`)
+
+                })
+                .catch(err=>{
+                    Alert.alert("Some Error")
+                    console.log(err)
+                })
+
+
+    }
     const renderList = ((item)=>{
         return(
             <Card style={styles.myCard}
-            key={item.id}>
+            key={item.id}
+            onPress={()=> recentData(item)}>
                 <View style={styles.cardContent}>
                         <Entypo name="folder" size={32} color="#fcba03"/>
                         <View style={{flexDirection:'column'}}>
