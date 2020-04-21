@@ -35,6 +35,14 @@ app.get('/',(req,res)=>{
     })
 })
 
+app.get('/recent_view',(req,res)=>{
+    recent.find({}).then(data=>{
+        res.send(data)
+    }).catch(err=>{
+        console.log(err)
+    })
+})
+
 app.post('/recentFolder',(req,res)=>{
     const Recent = new recent({
         name: req.body.name,
