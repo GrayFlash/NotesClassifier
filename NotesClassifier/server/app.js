@@ -3,10 +3,11 @@ const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 require('./recent')
+require('./schedule')
 require('./createNewFolder')
 app.use(bodyParser.json())
 
-// const registerUser = mongoose.model("registerUser")
+const schedule = mongoose.model("schedule")
 const createNewFolder= mongoose.model("createNewFolder")
 const recent = mongoose.model("recent")
 
@@ -41,6 +42,22 @@ app.get('/recent_view',(req,res)=>{
     }).catch(err=>{
         console.log(err)
     })
+})
+
+app.post('/set-schedule',(req,res)=>{
+    const Schedule = new schedule({
+        name: req.body.name,
+        purpose: req.body.purpose,
+        date: req.body.date,
+        time: req.body.time,
+    })
+    Schedule.save()
+    .then(data=>{
+        console.log("Scheduled List Update")
+        console.log(data)
+        res.send(data)
+    }).catch(err=>
+        console.log(err))
 })
 
 app.post('/recentFolder',(req,res)=>{

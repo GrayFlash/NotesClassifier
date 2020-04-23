@@ -10,7 +10,7 @@ const CreateNewFolder = ({navigation}) => {
         // Update the link below everytime you run the app unless you employ Heroku
         
         
-                fetch("http://77b3381e.ngrok.io/createNew",{
+                fetch("http://5c9fa979.ngrok.io/createNew",{
                     method:"post",
                     headers:{
                         'Content-Type':'application/json'

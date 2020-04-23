@@ -1,21 +1,22 @@
 import React,{Component, useState} from 'react';
-import { StyleSheet, Text, View, Modal } from 'react-native';
+import { StyleSheet, Text, View, Modal, Alert } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-import { TextInputMask } from 'react-native-masked-text';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const setSchedule =(props)=>{
+const setSchedule =({navigation})=>{
 
     const [Name, setName] = useState("");
     const [Purpose, setPurpose] = useState("");
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [modal, setmodal] = useState(false);
-    const onChange = (event, selectedDate) => {
+    const [Data, setData] = useState("");
+    const [Tima, setTima] = useState("");
+    const onChange = (event, selectedDate, selectedTime) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
+        subStringify(currentDate);
       };
     
       const showMode = currentMode => {
@@ -30,6 +31,46 @@ const setSchedule =(props)=>{
       const showTimepicker = () => {
         showMode('time');
       };
+      const subStringify = ( date ) =>{
+          var x = date;
+          date = String(x).substr(4,11);
+          var timer = String(x).substr(16,5);
+        //   console.log(String(x));
+        //   console.log(date);
+        //   console.log(timer);
+          setData(date);
+          setTima(timer);
+      }
+      const submitData = ()=>{
+
+        // Update the link below everytime you run the app unless you employ Heroku
+        
+        
+                fetch("http://5c9fa979.ngrok.io/set-schedule",{
+                    method:"post",
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        //_id,
+                        name: Name,
+                        purpose: Purpose,
+                        date: Data,
+                        time: Tima,
+
+                    })
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    Alert.alert(`Schedule for  ${data.name} have been set succesfully`)
+                    navigation.navigate("HomePage")
+                })
+                .catch(err=>{
+                    Alert.alert("Some Error")
+                    console.log(err)
+                })
+            }
+
 
     return(
             
@@ -75,10 +116,10 @@ const setSchedule =(props)=>{
                 )}
                 <Text></Text>
                 <Button theme={theme} icon="content-save" mode="contained" 
-                onPress={()=> console.log("Wants to save Schedule") }>
+                onPress={()=> submitData() }>
                     Save Schedule
                 </Button>
-                <Button theme={theme} icon="cancel" onPress={()=>  props.navigation.navigate("HomePage") }>
+                <Button theme={theme} icon="cancel" onPress={()=>  navigation.navigate("HomePage") }>
                     Cancel
                 </Button>
                 </View>
@@ -91,7 +132,6 @@ const theme = {
         primary:"#fcba03",
         
     },
-    //padding: 10,
 }
 const styles = StyleSheet.create({
     root:{
