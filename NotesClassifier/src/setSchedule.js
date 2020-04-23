@@ -1,15 +1,38 @@
 import React,{Component, useState} from 'react';
 import { StyleSheet, Text, View, Modal } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-
+import { TextInputMask } from 'react-native-masked-text';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const setSchedule =(props)=>{
 
     const [Name, setName] = useState("");
     const [Purpose, setPurpose] = useState("");
-    const [modal, setmodal] = useState(false)
+    const [date, setDate] = useState(new Date(1598051730000));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+    const [modal, setmodal] = useState(false);
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+      };
+    
+      const showMode = currentMode => {
+        setShow(true);
+        setMode(currentMode);
+      };
+    
+      const showDatepicker = () => {
+        showMode('date');
+      };
+    
+      const showTimepicker = () => {
+        showMode('time');
+      };
 
     return(
+            
             <View style={{flex:1}}>
                 <View style={styles.header}>
                     <Text style={styles.heading}>Set Your Schedule</Text>
@@ -31,14 +54,25 @@ const setSchedule =(props)=>{
                 />
                 <View style = {styles.saveButtonsView}>
                 <Button theme={theme} icon="content-save" mode="contained" 
-                onPress={()=> console.log("Select Date Button") }>
+                onPress={()=>showDatepicker()} >
                     Select Date
                 </Button>
                 <Text></Text>
                 <Button theme={theme} icon="content-save" mode="contained" 
-                onPress={()=> console.log("Set Time Button") }>
+                onPress={()=>showTimepicker()} >
                     Set Time
                 </Button>
+                {show && (
+                    <DateTimePicker
+                    testID="dateTimePicker"
+                    timeZoneOffsetInMinutes={0}
+                    value={date}
+                    mode={mode}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                    />
+                )}
                 <Text></Text>
                 <Button theme={theme} icon="content-save" mode="contained" 
                 onPress={()=> console.log("Wants to save Schedule") }>
