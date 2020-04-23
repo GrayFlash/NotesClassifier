@@ -12,4 +12,4 @@ web-report/
 server/node_modules/**/*
 # macOS
 .DS_Store
-server/app
+server
