@@ -60,6 +60,11 @@ function LeftDrawer () {
           options={{...stackDesignHead,title:"Recent Folder"}}
           />
           <Stack.Screen 
+          name="setSchedule"
+          component={setSchedule} 
+          options={{...stackDesignHead,title:"Set Schedule"}}
+          />
+          <Stack.Screen 
           name="ScheduleDetails"
           component={scheduleDetails} 
           options={{...stackDesignHead,title:"Schedule Preview"}}

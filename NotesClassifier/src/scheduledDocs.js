@@ -28,7 +28,7 @@ const scheduledDocs =(props)=>{
                 return(
                     <Card style={styles.myCard}
                     key={item.id}
-                    onPress={()=> props.navigation.navigate("ScheduleDetails")}>
+                    onPress={()=> props.navigation.navigate("ScheduleDetails", {item})}>
                         <View style={styles.cardContent}>
                                 <MaterialIcons name="schedule" size={32} color="red"/>
                                 <View style={{flexDirection:'column'}}>

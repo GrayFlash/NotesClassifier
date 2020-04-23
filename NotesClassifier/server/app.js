@@ -52,6 +52,17 @@ app.get('/recent_view',(req,res)=>{
     })
 })
 
+app.post('/deleteSchedule',(req,res)=>{
+    
+    schedule.findByIdAndRemove(req.body.id)
+    .then(data=>{
+        console.log(data)
+        res.send(data)
+    }).catch(err=>{
+        console.log(err)
+    })
+})
+
 app.post('/set-schedule',(req,res)=>{
     const Schedule = new schedule({
         name: req.body.name,
