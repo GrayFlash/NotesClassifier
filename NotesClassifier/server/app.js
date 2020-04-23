@@ -36,6 +36,14 @@ app.get('/',(req,res)=>{
     })
 })
 
+app.get('/scheduledDocsInfo',(req,res)=>{
+    schedule.find({}).then(data=>{
+        res.send(data)
+    }).catch(err=>{
+        console.log(err)
+    })
+})
+
 app.get('/recent_view',(req,res)=>{
     recent.find({}).then(data=>{
         res.send(data)
