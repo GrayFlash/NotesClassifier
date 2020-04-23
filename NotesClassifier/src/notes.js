@@ -11,7 +11,7 @@ const NotesFolder = (props) =>{
 
         // Update the link below everytime you run the app unless you employ Heroku
         
-                fetch("https://628262c3.ngrok.io/")
+                fetch("https://e0259279.ngrok.io/")
                 .then(res=>res.json())
                 .then(results=>{
                     setData(results)
@@ -25,20 +25,21 @@ const NotesFolder = (props) =>{
 
     const recentData = (item)=>{
 
-        fetch("https://628262c3.ngrok.io/recentFolder",{
+        fetch("http://e0259279.ngrok.io/recentFolder",{
                     method:"post",
                     headers:{
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify({
+                        _id: item._id,
                         name: item.name,
                         description: item.description
                     })
                 })
                 .then(res=>res.json())
                 .then(data=>{
-                    Alert.alert(`Details of ${data.name} has been added to recent succesfully`)
-
+                    //Alert.alert(`Details of ${data.name} has been added to recent succesfully`)
+                    console.log(`Details of ${data.name} has been added to recent succesfully`)
                 })
                 .catch(err=>{
                     Alert.alert("Some Error")
@@ -47,11 +48,30 @@ const NotesFolder = (props) =>{
 
 
     }
+
+    const deleteRecent = (name) =>{
+        fetch("http://e0259279.ngrok.io/deleteRecent",{
+            method:"post",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+                name
+            })
+        }).then(res=>res.json())
+        .then(deletedRec=>{
+            console.log(`${deletedRec.name} deleted`)
+        }).catch(err=>{
+            Alert.alert("Something went wrong")
+        })
+    }
+
+
     const renderList = ((item)=>{
         return(
             <Card style={styles.myCard}
             key={item.id}
-            onPress={()=> recentData(item)}>
+            onPress={()=> { deleteRecent(item._id), recentData(item)}}>
                 <View style={styles.cardContent}>
                         <Entypo name="folder" size={32} color="#fcba03"/>
                         <View style={{flexDirection:'column'}}>

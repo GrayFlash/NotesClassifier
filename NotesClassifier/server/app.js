@@ -43,7 +43,28 @@ app.get('/scheduledDocsInfo',(req,res)=>{
         console.log(err)
     })
 })
-
+app.post('/deleteRecent',(req,res)=>{
+    recent.findOneAndDelete(req.body.name)
+    .then(data=>{
+        console.log(data)
+        res.send(data)
+    }).catch(err=>{
+        console.log(err)
+    })
+})
+app.post('/recentFolder',(req,res)=>{
+    const Recent = new recent({
+        name: req.body.name,
+        description: req.body.description
+    })
+    Recent.save()
+    .then(data=>{
+        console.log("Recently Visited")
+        console.log(data)
+        res.send(data)
+    }).catch(err=>
+        console.log(err))
+})
 app.get('/recent_view',(req,res)=>{
     recent.find({}).then(data=>{
         res.send(data)
@@ -53,8 +74,7 @@ app.get('/recent_view',(req,res)=>{
 })
 
 app.post('/deleteSchedule',(req,res)=>{
-    
-    schedule.findByIdAndRemove(req.body.id)
+    schedule.findByIdAndDelete(req.body.id)
     .then(data=>{
         console.log(data)
         res.send(data)
@@ -62,6 +82,7 @@ app.post('/deleteSchedule',(req,res)=>{
         console.log(err)
     })
 })
+
 
 app.post('/set-schedule',(req,res)=>{
     const Schedule = new schedule({
@@ -79,19 +100,6 @@ app.post('/set-schedule',(req,res)=>{
         console.log(err))
 })
 
-app.post('/recentFolder',(req,res)=>{
-    const Recent = new recent({
-        name: req.body.name,
-        description: req.body.description
-    })
-    Recent.save()
-    .then(data=>{
-        console.log("Recently Visited")
-        console.log(data)
-        res.send(data)
-    }).catch(err=>
-        console.log(err))
-})
 
 app.post('/createNew',(req,res)=>{
     const NewFolder = new createNewFolder({

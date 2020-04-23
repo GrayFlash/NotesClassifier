@@ -46,7 +46,7 @@ const setSchedule =({navigation})=>{
         // Update the link below everytime you run the app unless you employ Heroku
         
         
-                fetch("https://628262c3.ngrok.io/set-schedule",{
+                fetch("http://e0259279.ngrok.io/set-schedule",{
                     method:"post",
                     headers:{
                         'Content-Type':'application/json'
