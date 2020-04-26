@@ -8,10 +8,10 @@ import { Entypo } from '@expo/vector-icons';
 const scheduleDetails =(props)=>{
 
     const { _id, name, purpose, date, time} = props.route.params.item
-
-
+    const items = props.route.params.item
+    console.log(items.name)
     const deleteSchedule = (_id) =>{
-        fetch("http://e0259279.ngrok.io/deleteSchedule",{
+        fetch("http://c13addc7.ngrok.io/deleteSchedule",{
             method:"post",
             headers:{
                 'Content-Type':'application/json'
@@ -36,14 +36,15 @@ const scheduleDetails =(props)=>{
                 style={{height:"20%"}}
             />
             <ScrollView>
-                <Card style={styles.myCard} >
+                <Card style={styles.myCard}
+                key={_id}
+                onPress={()=> props.navigation.navigate("viewFolders" , { items }) }
+                >
                 <View style={styles.cardContent}>
                 <Entypo name="folder" size={32} color="#fcba03"/>
                 <Text style={styles.myText}>{name}</Text>
                 </View>
                 </Card>
-                
-                
                 <Card style={styles.myCard} >
                 <View style={styles.cardContent}>
                 <Text style={styles.myText}>Purpose: {purpose}</Text>
@@ -57,7 +58,7 @@ const scheduleDetails =(props)=>{
                 </View>
                 </Card>
                 
-            
+                
                 <Card style={styles.myCard} >
                 <View style={styles.cardContent}>
                 <Text style={styles.myText}>Time: {time}</Text>

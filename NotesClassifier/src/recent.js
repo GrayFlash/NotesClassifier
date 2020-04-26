@@ -11,7 +11,7 @@ const recent = (props) =>{
 
         // Update the link below everytime you run the app unless you employ Heroku
         
-                fetch("http://e0259279.ngrok.io/recent_view")
+                fetch("http://c13addc7.ngrok.io/recent_view")
                 .then(res=>res.json())
                 .then(results=>{
                     setData(results)
@@ -27,7 +27,7 @@ const recent = (props) =>{
         return(
             <Card style={styles.myCard}
             key={item.id}
-            onPress={()=> recentData(item)}>
+            onPress={()=> props.navigation.navigate("viewFolders",{item})}>
                 <View style={styles.cardContent}>
                         <Entypo name="folder" size={32} color="#fcba03"/>
                         <View style={{flexDirection:'column'}}>

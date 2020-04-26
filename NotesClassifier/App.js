@@ -8,6 +8,7 @@ import scheduledDocs from  './src/scheduledDocs'
 import CreateNewFolder from './src/CreateNewFolder';
 import setSchedule from './src/setSchedule';
 import scheduleDetails from './src/scheduleDetails';
+import viewFolder from './src/viewFolders';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Constants from 'expo-constants';
 import { NavigationContainer } from '@react-navigation/native';
@@ -68,6 +69,11 @@ function LeftDrawer () {
           name="ScheduleDetails"
           component={scheduleDetails} 
           options={{...stackDesignHead,title:"Schedule Preview"}}
+          />
+          <Stack.Screen 
+          name="viewFolders"
+          component={viewFolder} 
+          options={{...stackDesignHead,title:"Folders View"}}
           />
           </Stack.Navigator> 
   )

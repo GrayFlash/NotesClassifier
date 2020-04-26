@@ -11,7 +11,7 @@ const NotesFolder = (props) =>{
 
         // Update the link below everytime you run the app unless you employ Heroku
         
-                fetch("https://e0259279.ngrok.io/")
+                fetch("http://c13addc7.ngrok.io/")
                 .then(res=>res.json())
                 .then(results=>{
                     setData(results)
@@ -25,7 +25,7 @@ const NotesFolder = (props) =>{
 
     const recentData = (item)=>{
 
-        fetch("http://e0259279.ngrok.io/recentFolder",{
+        fetch("http://c13addc7.ngrok.io/recentFolder",{
                     method:"post",
                     headers:{
                         'Content-Type':'application/json'
@@ -50,7 +50,7 @@ const NotesFolder = (props) =>{
     }
 
     const deleteRecent = (name) =>{
-        fetch("http://e0259279.ngrok.io/deleteRecent",{
+        fetch("http://c13addc7.ngrok.io/deleteRecent",{
             method:"post",
             headers:{
                 'Content-Type':'application/json'
@@ -71,7 +71,7 @@ const NotesFolder = (props) =>{
         return(
             <Card style={styles.myCard}
             key={item.id}
-            onPress={()=> { deleteRecent(item._id), recentData(item)}}>
+            onPress={()=> { deleteRecent(item._id), recentData(item), props.navigation.navigate("viewFolders" , { item })}}>
                 <View style={styles.cardContent}>
                         <Entypo name="folder" size={32} color="#fcba03"/>
                         <View style={{flexDirection:'column'}}>

@@ -5,12 +5,13 @@ const mongoose = require('mongoose')
 require('./recent')
 require('./schedule')
 require('./createNewFolder')
+require('./folderView')
 app.use(bodyParser.json())
 
 const schedule = mongoose.model("schedule")
 const createNewFolder= mongoose.model("createNewFolder")
 const recent = mongoose.model("recent")
-
+const folderView = mongoose.model("folderView")
 const mongoUri ="mongodb+srv://gray_lappy:5H46eq3VIP2TRKhV@cluster0-oi6g0.mongodb.net/test?retryWrites=true&w=majority"
 
 mongoose.connect(mongoUri,{
@@ -108,6 +109,33 @@ app.post('/createNew',(req,res)=>{
         })
     NewFolder.save()
     .then(data=>{
+        console.log(data)
+        res.send(data)
+    }).catch(err=>{
+        console.log(err)
+    })
+})
+
+
+app.post('/uploadDocuments',(req,res)=>{
+    const FolderView = new folderView({
+        folderName: req.body.folderName,
+        name: req.body.name,
+        document: req.body.document
+    })
+    FolderView.save()
+    .then(data=>{
+        console.log(data)
+        res.send(data)
+    }).catch(err=>{
+        console.log(err)
+    })
+})
+
+
+app.post('/getFolderDetails',(req,res)=>{
+    console.log(req.body.folderName)
+    folderView.find({'folderName':req.body.folderName}).then(data=>{
         console.log(data)
         res.send(data)
     }).catch(err=>{
