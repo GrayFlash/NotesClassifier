@@ -49,4 +49,3 @@ nodemon app
 * Build the app on Heroku instead.
 * set up chat server with authentication.
 * expo-eject (to build apk finally)
-
