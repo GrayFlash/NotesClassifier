@@ -12,7 +12,7 @@ const scheduledDocs =(props)=>{
 
         // Update the link below everytime you run the app unless you employ Heroku
         
-                fetch("http://c13addc7.ngrok.io/scheduledDocsInfo")
+                fetch("http://096b5b96.ngrok.io/scheduledDocsInfo")
                 .then(res=>res.json())
                 .then(results=>{
                     setData(results)

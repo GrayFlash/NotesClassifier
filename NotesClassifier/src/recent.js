@@ -11,7 +11,7 @@ const recent = (props) =>{
 
         // Update the link below everytime you run the app unless you employ Heroku
         
-                fetch("http://c13addc7.ngrok.io/recent_view")
+                fetch("http://096b5b96.ngrok.io/recent_view")
                 .then(res=>res.json())
                 .then(results=>{
                     setData(results)

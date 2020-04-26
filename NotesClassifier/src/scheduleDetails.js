@@ -11,7 +11,7 @@ const scheduleDetails =(props)=>{
     const items = props.route.params.item
     console.log(items.name)
     const deleteSchedule = (_id) =>{
-        fetch("http://c13addc7.ngrok.io/deleteSchedule",{
+        fetch("http://096b5b96.ngrok.io/deleteSchedule",{
             method:"post",
             headers:{
                 'Content-Type':'application/json'

@@ -23,9 +23,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    // "devDependencies": {
-    //   "mem": ">=4.0.0"
-    // },
     "ios": {
       "supportsTablet": true
     }

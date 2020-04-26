@@ -11,7 +11,7 @@ const NotesFolder = (props) =>{
 
         // Update the link below everytime you run the app unless you employ Heroku
         
-                fetch("http://c13addc7.ngrok.io/")
+                fetch("http://096b5b96.ngrok.io/")
                 .then(res=>res.json())
                 .then(results=>{
                     setData(results)
@@ -25,7 +25,7 @@ const NotesFolder = (props) =>{
 
     const recentData = (item)=>{
 
-        fetch("http://c13addc7.ngrok.io/recentFolder",{
+        fetch("http://096b5b96.ngrok.io/recentFolder",{
                     method:"post",
                     headers:{
                         'Content-Type':'application/json'
@@ -50,7 +50,7 @@ const NotesFolder = (props) =>{
     }
 
     const deleteRecent = (name) =>{
-        fetch("http://c13addc7.ngrok.io/deleteRecent",{
+        fetch("http://096b5b96.ngrok.io/deleteRecent",{
             method:"post",
             headers:{
                 'Content-Type':'application/json'
